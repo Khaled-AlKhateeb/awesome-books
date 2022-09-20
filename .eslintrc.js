@@ -69,7 +69,6 @@ module.exports = {
             "error",
             "windows"
         ],
-        "linebreak-style": "CRLF",
         "lines-around-comment": "error",
         "lines-between-class-members": "error",
         "max-classes-per-file": "error",
