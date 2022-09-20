@@ -7,12 +7,15 @@ const dataMod = [];
 
 function addNewBook() {
   const book = {};
+  const rmv = 'Rmv';
   book.title = titleInput.value;
   book.author = authorInput.value;
   dataMod.push(book);
 
   const stringVal = titleInput.value;
   const idString = stringVal.replace(/\s/g, '');
+  const rmvBtn = idString + rmv;
+
   window.localStorage.setItem(idString, JSON.stringify(book));
 
   const bookDiv = document.createElement('div');
@@ -26,7 +29,7 @@ function addNewBook() {
   bookAuthor.innerHTML = authorInput.value;
 
   bookDiv.setAttribute('id', idString);
-  removeBtn.setAttribute('id', idString + 'Rmv');
+  removeBtn.setAttribute('id', rmvBtn);
 
   bookDiv.appendChild(bookTitle);
   bookDiv.appendChild(bookAuthor);
@@ -36,9 +39,10 @@ function addNewBook() {
 }
 
 function removeBook(id) {
+  const rmv = 'Rmv';
   for (let i = 0; i < addBook.children.length; i += 1) {
-    let selected = addBook.children[i];
-    if (selected.id + 'Rmv' === id) {
+    const selected = addBook.children[i];
+    if (selected.id + rmv === id) {
       addBook.removeChild(selected);
       dataMod.splice(i, 1);
       window.localStorage.removeItem(selected.id);
