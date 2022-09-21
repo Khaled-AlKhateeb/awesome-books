@@ -1,3 +1,83 @@
 body {
   font-family: 'Open Sans', sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.main-container {
+  width: 70%;
+}
+
+.books-ph {
+  max-height: 50vh;
+  border: 3px solid black;
+  border-radius: 3px;
+  margin-bottom: 3rem;
+}
+
+.book-container {
+  display: flex;
+  padding: 0.2rem;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.book-container:nth-child(odd) {
+  background-color: lightgray;
+}
+
+.book-title {
+  font-weight: 700;
+  line-height: 2.2rem;
+  margin: 0;
+}
+
+.remove-btn {
+  font-weight: 700;
+  font-size: 1.08rem;
+  height: 2rem;
+  border: 2px solid black;
+  background-color: white;
+}
+
+.divider {
+  height: 4px;
+  background-color: black;
+  width: 50%;
+  border-top-left-radius: 70%;
+  border-bottom-right-radius: 70%;
+  margin-bottom: 3rem;
+}
+
+.input-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+  width: 70%;
+  gap: 1rem;
+  margin: auto;
+}
+
+.input {
+  width: 100%;
+  border: 2px solid black;
+  border-radius: 3px;
+  padding: 0.3rem;
+  font-size: 1.06rem;
+  font-weight: 600;
+  box-sizing: border-box;
+}
+
+.input-btn {
+  width: 4rem;
+  align-self: end;
+  border: 2px solid black;
+  border-radius: 3px;
+  padding: 0.3rem;
+  background-color: white;
+  font-size: 1.06rem;
+  font-weight: 600;
 }
