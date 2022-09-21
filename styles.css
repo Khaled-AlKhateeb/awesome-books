@@ -41,7 +41,6 @@ body {
   border: none;
   background-color: transparent;
   padding: 0.5rem;
-  height: fit-content;
 }
 
 input[type=radio]:checked + span {
@@ -151,7 +150,8 @@ input[type=radio]:checked + span {
   margin-bottom: 3rem;
 }
 
-.contact-question, .contact-list-item {
+.contact-question,
+.contact-list-item {
   font-size: 1.06rem;
   font-weight: 700;
 }
