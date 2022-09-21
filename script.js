@@ -1,32 +1,36 @@
 /* eslint-disable no-unused-vars */
-const titleInput = document.getElementById('title');
-const authorInput = document.getElementById('author');
+
+let dataMod = [];
 const addBook = document.getElementById('book');
 
-const dataMod = [];
-
 function addNewBook() {
+  const titleInput = document.getElementById('title');
+  const authorInput = document.getElementById('author');
   const book = {};
-  const rmv = 'Rmv';
   book.title = titleInput.value;
   book.author = authorInput.value;
   dataMod.push(book);
+  
+  window.localStorage.setItem('books', JSON.stringify(dataMod));
+  
+  drawOnScreen(book)
+}
 
-  const stringVal = titleInput.value;
+function drawOnScreen(obj) {
+  const stringVal = obj.title;
   const idString = stringVal.replace(/\s/g, '');
-  const rmvBtn = idString + rmv;
-
-  window.localStorage.setItem(idString, JSON.stringify(book));
-
   const bookDiv = document.createElement('div');
   const bookTitle = document.createElement('h2');
   const bookAuthor = document.createElement('h2');
   const removeBtn = document.createElement('button');
   const divider = document.createElement('hr');
+  const rmv = 'Rmv';
+  const rmvBtn = idString + rmv;
+
   removeBtn.innerHTML = 'Remove';
   removeBtn.setAttribute('onclick', 'removeBook(this.id)');
-  bookTitle.innerHTML = titleInput.value;
-  bookAuthor.innerHTML = authorInput.value;
+  bookTitle.innerHTML = obj.title;
+  bookAuthor.innerHTML = obj.author;
 
   bookDiv.setAttribute('id', idString);
   removeBtn.setAttribute('id', rmvBtn);
@@ -45,7 +49,18 @@ function removeBook(id) {
     if (selected.id + rmv === id) {
       addBook.removeChild(selected);
       dataMod.splice(i, 1);
-      window.localStorage.removeItem(selected.id);
+      window.localStorage.setItem('books', JSON.stringify(dataMod));
     }
   }
 }
+
+window.addEventListener('load', () => {
+  let localStorageItem = window.localStorage.getItem('books');
+  console.log(localStorageItem);
+  if (localStorageItem) {
+    dataMod = JSON.parse(localStorageItem);
+    dataMod.forEach(element => {
+      drawOnScreen(element)
+    });
+  }
+})
