@@ -3,19 +3,6 @@
 let dataMod = [];
 const addBook = document.getElementById('book');
 
-function addNewBook() {
-  const titleInput = document.getElementById('title');
-  const authorInput = document.getElementById('author');
-  const book = {};
-  book.title = titleInput.value;
-  book.author = authorInput.value;
-  dataMod.push(book);
-  
-  window.localStorage.setItem('books', JSON.stringify(dataMod));
-  
-  drawOnScreen(book)
-}
-
 function drawOnScreen(obj) {
   const stringVal = obj.title;
   const idString = stringVal.replace(/\s/g, '');
@@ -42,6 +29,19 @@ function drawOnScreen(obj) {
   addBook.appendChild(bookDiv);
 }
 
+function addNewBook() {
+  const titleInput = document.getElementById('title');
+  const authorInput = document.getElementById('author');
+  const book = {};
+  book.title = titleInput.value;
+  book.author = authorInput.value;
+  dataMod.push(book);
+
+  window.localStorage.setItem('books', JSON.stringify(dataMod));
+
+  drawOnScreen(book);
+}
+
 function removeBook(id) {
   const rmv = 'Rmv';
   for (let i = 0; i < addBook.children.length; i += 1) {
@@ -55,12 +55,11 @@ function removeBook(id) {
 }
 
 window.addEventListener('load', () => {
-  let localStorageItem = window.localStorage.getItem('books');
-  console.log(localStorageItem);
+  const localStorageItem = window.localStorage.getItem('books');
   if (localStorageItem) {
     dataMod = JSON.parse(localStorageItem);
-    dataMod.forEach(element => {
-      drawOnScreen(element)
+    dataMod.forEach((element) => {
+      drawOnScreen(element);
     });
   }
-})
+});
