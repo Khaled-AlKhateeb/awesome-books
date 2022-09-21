@@ -10,9 +10,8 @@ awesome books version.1
 - HTML/ JavaScript
 - Linters
 
-## Live Demo (if available)
-
-[Live Demo Link](https://livedemo.com)
+## Live Demo 
+Coming soon...
 
 
 ### Prerequisites
