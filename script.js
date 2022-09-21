@@ -1,66 +1,85 @@
 /* eslint-disable no-unused-vars */
+/* eslint-disable prefer-template */
 
-let dataMod = [];
+class BookLibrary {
+  constructor() {
+    this.booksArr = [];
+    this.add = (Obj) => {
+      this.booksArr.push(Obj);
+    };
+    this.remove = (Obj) => {
+      this.booksArr.splice(Obj, 1);
+    };
+  }
+}
+
+const library = new BookLibrary();
+
 const addBook = document.getElementById('book');
 
 function drawOnScreen(obj) {
-    const stringVal = obj.title;
-    const idString = stringVal.replace(/\s/g, '');
-    const bookDiv = document.createElement('div');
-    const bookTitle = document.createElement('p');
-    const removeBtn = document.createElement('button');
-    const rmv = 'Rmv';
-    const rmvBtn = idString + rmv;
+  const stringVal = obj.title;
+  const idString = stringVal.replace(/\s/g, '');
+  const bookDiv = document.createElement('div');
+  const bookTitle = document.createElement('p');
+  const removeBtn = document.createElement('button');
+  const rmv = 'Rmv';
+  const rmvBtn = idString + rmv;
 
-    bookDiv.classList.add('book-container');
-    bookTitle.classList.add('book-title');
-    removeBtn.classList.add('remove-btn');
-    removeBtn.innerHTML = 'Remove';
-    removeBtn.setAttribute('onclick', 'removeBook(this.id)');
-    bookTitle.innerHTML = '"' + obj.title + '" by ' + obj.author;
+  bookDiv.classList.add('book-container');
+  bookTitle.classList.add('book-title');
+  removeBtn.classList.add('remove-btn');
+  removeBtn.innerHTML = 'Remove';
+  removeBtn.setAttribute('onclick', 'removeBook(this.id)');
 
-    bookDiv.setAttribute('id', idString);
-    removeBtn.setAttribute('id', rmvBtn);
+  bookTitle.innerHTML = '"' + obj.title + '" by ' + obj.author;
 
-    bookDiv.appendChild(bookTitle);
-    bookDiv.appendChild(removeBtn);
-    addBook.appendChild(bookDiv);
+  bookDiv.setAttribute('id', idString);
+  removeBtn.setAttribute('id', rmvBtn);
+
+  bookDiv.appendChild(bookTitle);
+  bookDiv.appendChild(removeBtn);
+  addBook.appendChild(bookDiv);
 }
 
 function addNewBook() {
-    const titleInput = document.getElementById('title');
-    const authorInput = document.getElementById('author');
-    const book = {};
-    book.title = titleInput.value;
-    book.author = authorInput.value;
-    dataMod.push(book);
+  const bookEntries = {
+    title: null,
+    author: null,
+  };
+  const titleInput = document.getElementById('title');
+  const authorInput = document.getElementById('author');
 
-    titleInput.value = '';
-    authorInput.value = '';
+  bookEntries.title = titleInput.value;
+  bookEntries.author = authorInput.value;
+  library.add(bookEntries);
 
-    window.localStorage.setItem('books', JSON.stringify(dataMod));
+  titleInput.value = '';
+  authorInput.value = '';
 
-    drawOnScreen(book);
+  window.localStorage.setItem('books', JSON.stringify(library.booksArr));
+
+  drawOnScreen(bookEntries);
 }
 
 function removeBook(id) {
-    const rmv = 'Rmv';
-    for (let i = 0; i < addBook.children.length; i += 1) {
-        const selected = addBook.children[i];
-        if (selected.id + rmv === id) {
-            addBook.removeChild(selected);
-            dataMod.splice(i, 1);
-            window.localStorage.setItem('books', JSON.stringify(dataMod));
-        }
+  const rmv = 'Rmv';
+  for (let i = 0; i < addBook.children.length; i += 1) {
+    const selected = addBook.children[i];
+    if (selected.id + rmv === id) {
+      addBook.removeChild(selected);
+      library.remove(i);
+      window.localStorage.setItem('books', JSON.stringify(library.booksArr));
     }
+  }
 }
 
 window.addEventListener('load', () => {
-    const localStorageItem = window.localStorage.getItem('books');
-    if (localStorageItem) {
-        dataMod = JSON.parse(localStorageItem);
-        dataMod.forEach((element) => {
-            drawOnScreen(element);
-        });
-    }
+  const localStorageItem = window.localStorage.getItem('books');
+  if (localStorageItem) {
+    library.booksArr = JSON.parse(localStorageItem);
+    library.booksArr.forEach((element) => {
+      drawOnScreen(element);
+    });
+  }
 });
