@@ -13,7 +13,6 @@ awesome books version.1
 ## Live Demo 
 Coming soon...
 
-
 ### Prerequisites
 HTML/ JavaScript
 ### Setup
