@@ -92,11 +92,13 @@ function selectList() {
   listTab.style.display = 'block';
   addNewTab.style.display = 'none';
   contactTab.style.display = 'none';
+  contactTab.style.display = 'none';
 }
 
 function selectAdd() {
   listTab.style.display = 'none';
   addNewTab.style.display = 'block';
+  contactTab.style.display = 'none';
   contactTab.style.display = 'none';
 }
 
@@ -104,8 +106,11 @@ function selectContact() {
   listTab.style.display = 'none';
   addNewTab.style.display = 'none';
   contactTab.style.display = 'flex';
+  contactTab.style.display = 'flex';
 }
 
+const clock = document.getElementById('clock-time');
+const ante = document.getElementById('clock-ampm');
 const clock = document.getElementById('clock-time');
 const ante = document.getElementById('clock-ampm');
 
@@ -115,11 +120,17 @@ function myHour() {
   let minutes = time.getMinutes().toString();
   let seconds = time.getSeconds().toString();
   const antem = time.toLocaleTimeString().includes('PM');
+  const antem = time.toLocaleTimeString().includes('PM');
 
   if (hours > 12) {
     hours -= 12;
   }
+    hours -= 12;
+  }
 
+  if (hours === 0) {
+    hours = 12;
+  }
   if (hours === 0) {
     hours = 12;
   }
@@ -127,23 +138,35 @@ function myHour() {
   if (hours.toString().length < 2) {
     hours = '0' + hours;
   }
+    hours = '0' + hours;
+  }
 
   if (antem === true) {
     ante.textContent = 'PM';
+  if (antem === true) {
+    ante.textContent = 'PM';
   } else {
+    ante.textContent = 'AM';
+  }
     ante.textContent = 'AM';
   }
 
   if (minutes.length < 2) {
     minutes = '0' + minutes;
   }
+    minutes = '0' + minutes;
+  }
 
   if (seconds.length < 2) {
+    seconds = '0' + seconds;
+  }
     seconds = '0' + seconds;
   }
 
   setTimeout(myHour, 1000);
 
+  clock.textContent = hours + ':' + minutes + ':' + seconds;
+}
   clock.textContent = hours + ':' + minutes + ':' + seconds;
 }
 
